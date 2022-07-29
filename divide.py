@@ -44,6 +44,7 @@ class Divider:
                 else:
                     self.buffer.append(token)
 
+            self.buffer.remove('')
             if len(self.buffer) > 0 and self.buffer[-1].endswith(";"):
                 self.statements.append(' '.join(self.buffer))
                 self.buffer = []
