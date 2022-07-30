@@ -15,6 +15,7 @@ where a.c3 = 'aaaa';select /*+ index  a.c1, b.c2
  c3, c4--, c5*/
 b.c6
 , 'a column -- /* ;value*/' c7
+, a.c9,/*-- '*//**//* */ a.c8
 from table_a a
 join table_b b
 on a.c1 = b.c1

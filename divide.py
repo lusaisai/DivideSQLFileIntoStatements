@@ -1,4 +1,17 @@
 import re
+from enum import Enum
+
+
+class TokenType(Enum):
+    BLOCK_COMMENT_START = 1
+    LINE_COMMENT_START = 2
+    QUOTE_START = 3
+
+
+def get_token_type(token: str):
+    block_comment_pos = token.find('/*')
+    line_comment_pos = token.find('--')
+    quote_pos = token.find("'")
 
 
 class Divider:
@@ -44,12 +57,14 @@ class Divider:
                 else:
                     self.buffer.append(token)
 
-            self.buffer.remove('')
             if len(self.buffer) > 0 and self.buffer[-1].endswith(";"):
                 self.statements.append(' '.join(self.buffer))
                 self.buffer = []
 
-        self.buffer.remove('')
+        try:
+            self.buffer.remove('')
+        except ValueError:
+            pass
         if len(self.buffer) > 0 and not self.buffer[-1].endswith(";"):
             self.statements.append(' '.join(self.buffer)+';')
 
